@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { 
-  JeedomConfig, 
-  JeedomApiRequest, 
-  JeedomApiResponse, 
-  JeedomDevice, 
+import { catchError, tap, map } from 'rxjs/operators';
+import {
+  JeedomConfig,
+  JeedomApiRequest,
+  JeedomApiResponse,
+  JeedomDevice,
   JeedomRoom,
-  JeedomPlugin
+  JeedomPlugin,
 } from '../models/jeedom.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class JeedomApiService {
   private config = new BehaviorSubject<JeedomConfig | null>(null);
   config$ = this.config.asObservable();
-  
+
   private requestId = 0;
 
   constructor(private http: HttpClient) {
@@ -49,41 +49,44 @@ export class JeedomApiService {
       method: method,
       params: {
         ...params,
-        apikey: this.config.value?.apiKey
-      }
+        apikey: this.config.value?.apiKey,
+      },
     };
   }
 
-  private executeRequest(request: JeedomApiRequest): Observable<JeedomApiResponse> {
+  private executeRequest(
+    request: JeedomApiRequest
+  ): Observable<JeedomApiResponse> {
     if (!this.config.value) {
       return throwError(() => new Error('Jeedom API not configured'));
     }
 
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
 
-    return this.http.post<JeedomApiResponse>(
-      this.config.value.apiUrl,
-      request,
-      { headers }
-    ).pipe(
-      catchError(error => {
-        console.error('API error:', error);
-        return throwError(() => new Error('Failed to communicate with Jeedom API'));
-      })
-    );
+    return this.http
+      .post<JeedomApiResponse>(this.config.value.apiUrl, request, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error('API error:', error);
+          return throwError(
+            () => new Error('Failed to communicate with Jeedom API')
+          );
+        })
+      );
   }
 
   testConnection(): Observable<boolean> {
     const request = this.createRequest('ping');
     return this.executeRequest(request).pipe(
-      tap(response => {
+      map((response) => {
         if (response.error) {
           throw new Error(response.error.message);
         }
+        return true;
       }),
-      catchError(error => {
+      catchError((error) => {
         console.error('Connection test failed:', error);
         return throwError(() => error);
       }),
@@ -95,79 +98,83 @@ export class JeedomApiService {
   getDevices(): Observable<JeedomDevice[]> {
     const request = this.createRequest('eqLogic::all');
     return this.executeRequest(request).pipe(
-      tap(response => {
+      map((response) => {
         if (response.error) {
           throw new Error(response.error.message);
         }
-      }),
-      tap(response => response.result as JeedomDevice[])
+        return response.result as JeedomDevice[];
+      })
     );
   }
 
   getDeviceById(id: string): Observable<JeedomDevice> {
     const request = this.createRequest('eqLogic::byId', { id });
     return this.executeRequest(request).pipe(
-      tap(response => {
+      map((response) => {
         if (response.error) {
           throw new Error(response.error.message);
         }
-      }),
-      tap(response => response.result as JeedomDevice)
+        return response.result as JeedomDevice;
+      })
     );
   }
 
   getRooms(): Observable<JeedomRoom[]> {
     const request = this.createRequest('object::all');
     return this.executeRequest(request).pipe(
-      tap(response => {
+      map((response) => {
         if (response.error) {
           throw new Error(response.error.message);
         }
-      }),
-      tap(response => response.result as JeedomRoom[])
+        return response.result as JeedomRoom[];
+      })
     );
   }
 
   getPlugins(): Observable<JeedomPlugin[]> {
     const request = this.createRequest('plugin::listPlugin');
     return this.executeRequest(request).pipe(
-      tap(response => {
+      map((response) => {
         if (response.error) {
           throw new Error(response.error.message);
         }
-      }),
-      tap(response => response.result as JeedomPlugin[])
+        return response.result as JeedomPlugin[];
+      })
     );
   }
 
   executeCommand(cmdId: string, options: any = {}): Observable<any> {
-    const request = this.createRequest('cmd::execCmd', { 
+    const request = this.createRequest('cmd::execCmd', {
       id: cmdId,
-      ...options
+      ...options,
     });
     return this.executeRequest(request).pipe(
-      tap(response => {
+      tap((response) => {
         if (response.error) {
           throw new Error(response.error.message);
         }
       }),
-      tap(response => response.result)
+      tap((response) => response.result)
     );
   }
 
-  getCommandHistory(cmdId: string, startDate?: string, endDate?: string): Observable<any> {
+  getCommandHistory(
+    cmdId: string,
+    startDate?: string,
+    endDate?: string
+  ): Observable<any> {
     const params: any = { id: cmdId };
     if (startDate) params.startDate = startDate;
     if (endDate) params.endDate = endDate;
 
     const request = this.createRequest('cmd::getHistory', params);
     return this.executeRequest(request).pipe(
-      tap(response => {
+      tap((response) => {
         if (response.error) {
           throw new Error(response.error.message);
         }
       }),
-      tap(response => response.result)
+      tap((response) => response.result)
     );
   }
 }
