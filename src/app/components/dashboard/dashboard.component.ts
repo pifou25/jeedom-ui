@@ -25,21 +25,36 @@ import { DeviceCardComponent } from '../device-card/device-card.component';
       </div>
       
       <div *ngIf="!isLoading && !errorMessage">
+        <!-- Affichage des pièces avec leurs équipements -->
         <div *ngFor="let room of rooms">
-          <div class="card" *ngIf="getDevicesForRoom(room.id).length > 0">
-            <h2>{{ room.name }}</h2>
-            <div class="device-grid">
+          <div class="card room-card">
+            <div class="room-header">
+              <h2>{{ room.name }}</h2>
+              <span class="device-count" *ngIf="getDevicesForRoom(room.id).length > 0">
+                {{ getDevicesForRoom(room.id).length }} équipement(s)
+              </span>
+            </div>
+            <div class="device-grid" *ngIf="getDevicesForRoom(room.id).length > 0">
               <app-device-card 
                 *ngFor="let device of getDevicesForRoom(room.id)" 
                 [device]="device"
                 (refresh)="refreshDevices()"
               ></app-device-card>
             </div>
+            <div *ngIf="getDevicesForRoom(room.id).length === 0" class="no-devices">
+              Aucun équipement dans cette pièce
+            </div>
           </div>
         </div>
         
-        <div class="card" *ngIf="getDevicesWithoutRoom().length > 0">
-          <h2>Équipements sans pièce</h2>
+        <!-- Affichage des équipements sans pièce assignée -->
+        <div class="card room-card" *ngIf="getDevicesWithoutRoom().length > 0">
+          <div class="room-header">
+            <h2>Équipements sans pièce</h2>
+            <span class="device-count">
+              {{ getDevicesWithoutRoom().length }} équipement(s)
+            </span>
+          </div>
           <div class="device-grid">
             <app-device-card 
               *ngFor="let device of getDevicesWithoutRoom()" 
@@ -47,6 +62,11 @@ import { DeviceCardComponent } from '../device-card/device-card.component';
               (refresh)="refreshDevices()"
             ></app-device-card>
           </div>
+        </div>
+
+        <!-- Message si aucun équipement n'est disponible -->
+        <div *ngIf="devices.length === 0" class="card">
+          <p class="no-devices">Aucun équipement disponible</p>
         </div>
       </div>
     </div>
@@ -79,7 +99,7 @@ export class DashboardComponent implements OnInit {
     // Charger les pièces
     this.jeedomApiService.getRooms().subscribe({
       next: (rooms) => {
-        this.rooms = rooms;
+        this.rooms = rooms.filter(room => room.isVisible);
         
         // Puis charger les équipements
         this.jeedomApiService.getDevices().subscribe({
