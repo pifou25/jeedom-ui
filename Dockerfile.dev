@@ -1,0 +1,28 @@
+FROM node:20-alpine
+
+# install git
+RUN apk update && apk add git
+## install npm typescript and angular
+RUN npm install -g typescript && npm install -g @angular/cli
+
+WORKDIR /app
+VOLUME /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# do not copy & build at built time: it will be done at run time.
+# COPY . .
+# RUN npm run build
+
+# Expose port 4200
+EXPOSE 4200
+
+CMD npm install && ng serve --host 0.0.0.0
+# build with
+# docker build -t jeedom-ui-dev -f Dockerfile.dev .
+# run with
+# docker run --name jeedom-ui-dev -v "$PWD":/app -p 4200:4200 --rm -ti jeedom-ui-dev

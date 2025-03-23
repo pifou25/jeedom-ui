@@ -7,38 +7,8 @@ import { JeedomApiService } from '../../services/jeedom-api.service';
   selector: 'app-device-card',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="device-card">
-      <h3>{{ device.name }}</h3>
-      <p>Type: {{ device.eqType_name }}</p>
-      
-      <div *ngIf="isLoading" class="loading-spinner"></div>
-      
-      <div *ngIf="errorMessage" class="alert alert-danger">
-        {{ errorMessage }}
-      </div>
-      
-      <div *ngFor="let cmd of getInfoCommands()">
-        <div *ngIf="cmd.isVisible">
-          <strong>{{ cmd.name }}:</strong> {{ cmd.value }} {{ cmd.unit }}
-        </div>
-      </div>
-      
-      <div *ngIf="getActionCommands().length > 0">
-        <hr>
-        <div *ngFor="let cmd of getActionCommands()">
-          <button 
-            *ngIf="cmd.isVisible" 
-            class="btn" 
-            (click)="executeCommand(cmd)"
-            [disabled]="isExecuting"
-          >
-            {{ cmd.name }}
-          </button>
-        </div>
-      </div>
-    </div>
-  `
+  templateUrl: './device-card.html',
+  styleUrl: './device-card.css'
 })
 export class DeviceCardComponent {
   @Input() device!: JeedomDevice;
@@ -51,11 +21,11 @@ export class DeviceCardComponent {
   constructor(private jeedomApiService: JeedomApiService) {}
 
   getInfoCommands(): JeedomCommand[] {
-    return this.device.cmds.filter(cmd => cmd.type === 'info');
+    return this.device.cmds ? this.device.cmds.filter(cmd => cmd.type === 'info') : [];
   }
 
   getActionCommands(): JeedomCommand[] {
-    return this.device.cmds.filter(cmd => cmd.type === 'action');
+    return this.device.cmds ? this.device.cmds.filter(cmd => cmd.type === 'action') : [];
   }
 
   executeCommand(cmd: JeedomCommand): void {

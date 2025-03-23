@@ -9,48 +9,8 @@ import { DeviceCardComponent } from '../device-card/device-card.component';
   selector: 'app-dashboard',
   standalone: true,
   imports: [CommonModule, DeviceCardComponent],
-  template: `
-    <div class="container">
-      <div class="header">
-        <h1>Tableau de bord Jeedom</h1>
-        <button class="btn" (click)="logout()">Déconnexion</button>
-      </div>
-      
-      <div *ngIf="isLoading" class="card">
-        <div class="loading-spinner"></div> Chargement des données...
-      </div>
-      
-      <div *ngIf="errorMessage" class="alert alert-danger">
-        {{ errorMessage }}
-      </div>
-      
-      <div *ngIf="!isLoading && !errorMessage">
-        <div *ngFor="let room of rooms">
-          <div class="card" *ngIf="getDevicesForRoom(room.id).length > 0">
-            <h2>{{ room.name }}</h2>
-            <div class="device-grid">
-              <app-device-card 
-                *ngFor="let device of getDevicesForRoom(room.id)" 
-                [device]="device"
-                (refresh)="refreshDevices()"
-              ></app-device-card>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card" *ngIf="getDevicesWithoutRoom().length > 0">
-          <h2>Équipements sans pièce</h2>
-          <div class="device-grid">
-            <app-device-card 
-              *ngFor="let device of getDevicesWithoutRoom()" 
-              [device]="device"
-              (refresh)="refreshDevices()"
-            ></app-device-card>
-          </div>
-        </div>
-      </div>
-    </div>
-  `
+  templateUrl: './dashboard.html',
+  styleUrl: './dashboard.css'
 })
 export class DashboardComponent implements OnInit {
   devices: JeedomDevice[] = [];
@@ -80,11 +40,13 @@ export class DashboardComponent implements OnInit {
     this.jeedomApiService.getRooms().subscribe({
       next: (rooms) => {
         this.rooms = rooms;
-        
+        console.debug( this.rooms.length + " rooms loaded")
+
         // Puis charger les équipements
         this.jeedomApiService.getDevices().subscribe({
           next: (devices) => {
             this.devices = devices.filter(device => device.isEnable && device.isVisible);
+            console.debug( this.devices.length + " devices loaded")
             this.isLoading = false;
           },
           error: (error) => {
