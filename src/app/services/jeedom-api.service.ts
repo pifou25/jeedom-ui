@@ -108,13 +108,25 @@ export class JeedomApiService {
   }
 
   getDeviceById(id: string): Observable<JeedomDevice> {
-    const request = this.createRequest('eqLogic::byId', { id });
+    const request = this.createRequest('eqLogic::byId', { 'id': id });
     return this.executeRequest(request).pipe(
       map((response) => {
         if (response.error) {
           throw new Error(response.error.message);
         }
         return response.result as JeedomDevice;
+      })
+    );
+  }
+
+  getDevicesByRoom(object_id: string): Observable<JeedomDevice[]> {
+    const request = this.createRequest('eqLogic::byObjectId', { 'object_id': object_id });
+    return this.executeRequest(request).pipe(
+      map((response) => {
+        if (response.error) {
+          throw new Error(response.error.message);
+        }
+        return response.result as JeedomDevice[];
       })
     );
   }

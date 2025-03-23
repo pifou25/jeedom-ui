@@ -1,0 +1,16 @@
+<h2>{{ room.name }}</h2>
+<div *ngIf="isLoading" class="card">
+  <div class="loading-spinner"></div> Chargement de {{ room.name }}...
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
+
+<div class="device-grid">
+  <app-device-card 
+    *ngFor="let device of getDevicesForRoom()" 
+    [device]="device"
+    (refresh)="refreshDevices()"
+  ></app-device-card>
+</div>
