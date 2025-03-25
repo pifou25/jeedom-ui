@@ -28,5 +28,9 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Expose port 80
 EXPOSE 80
 
+LABEL org.opencontainers.image.source=https://github.com/pifou25/jeedom-ui
+LABEL org.opencontainers.image.description="Angular standalone interface for Jeedom Home Automation"
+LABEL org.opencontainers.image.licenses=MIT
+
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
