@@ -9,9 +9,69 @@ import { RoomComponent } from '../room/room.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, DeviceCardComponent, RoomComponent],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css'
+  imports: [CommonModule, DeviceCardComponent],
+  template: `
+    <div class="container">
+      <div class="header">
+        <h1>Tableau de bord Jeedom</h1>
+        <button class="btn" (click)="logout()">Déconnexion</button>
+      </div>
+      
+      <div *ngIf="isLoading" class="card">
+        <div class="loading-spinner"></div> Chargement des données...
+      </div>
+      
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+      
+      <div *ngIf="!isLoading && !errorMessage">
+        <!-- Affichage des pièces avec leurs équipements -->
+        <div *ngFor="let room of rooms">
+          <div class="card room-card">
+            <div class="room-header">
+              <h2>{{ room.name }}</h2>
+              <span class="device-count" *ngIf="getDevicesForRoom(room.id).length > 0">
+                {{ getDevicesForRoom(room.id).length }} équipement(s)
+              </span>
+            </div>
+            <div class="device-grid" *ngIf="getDevicesForRoom(room.id).length > 0">
+              <app-device-card 
+                *ngFor="let device of getDevicesForRoom(room.id)" 
+                [device]="device"
+                (refresh)="refreshDevices()"
+              ></app-device-card>
+            </div>
+            <div *ngIf="getDevicesForRoom(room.id).length === 0" class="no-devices">
+              Aucun équipement dans cette pièce
+            </div>
+          </div>
+        </div>
+        
+        <!-- Affichage des équipements sans pièce assignée -->
+        <div class="card room-card" *ngIf="getDevicesWithoutRoom().length > 0">
+          <div class="room-header">
+            <h2>Équipements sans pièce</h2>
+            <span class="device-count">
+              {{ getDevicesWithoutRoom().length }} équipement(s)
+            </span>
+          </div>
+          <div class="device-grid">
+            <app-device-card 
+              *ngFor="let device of getDevicesWithoutRoom()" 
+              [device]="device"
+              (refresh)="refreshDevices()"
+            ></app-device-card>
+          </div>
+        </div>
+
+        <!-- Message si aucun équipement n'est disponible -->
+        <div *ngIf="devices.length === 0" class="card">
+          <p class="no-devices">Aucun équipement disponible</p>
+        </div>
+      </div>
+    </div>
+  `
 })
 export class DashboardComponent implements OnInit {
   devices: JeedomDevice[] = [];
@@ -40,9 +100,8 @@ export class DashboardComponent implements OnInit {
     // Charger les pièces
     this.jeedomApiService.getRooms().subscribe({
       next: (rooms) => {
-        this.rooms = rooms;
-        console.debug( this.rooms.length + " rooms loaded")
-
+        this.rooms = rooms.filter(room => room.isVisible);
+        
         // Puis charger les équipements
         this.jeedomApiService.getDevices().subscribe({
           next: (devices) => {
