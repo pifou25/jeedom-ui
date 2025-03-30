@@ -17,3 +17,4 @@ The `Dockerfile.dev` is for development only: build and serve the code over WSL,
 `docker build -t jeedom-ui-dev -f Dockerfile.env .`
 
 `docker run --name jeedom-ui-dev -v "$PWD":/app -p 4200:4200 --rm -ti jeedom-ui-dev`
+

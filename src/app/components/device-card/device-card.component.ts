@@ -14,7 +14,6 @@ export class DeviceCardComponent {
   @Input() device!: JeedomDevice;
   @Output() refresh = new EventEmitter<void>();
   
-  isLoading = false;
   isExecuting = false;
   errorMessage = '';
 
@@ -26,6 +25,10 @@ export class DeviceCardComponent {
 
   getActionCommands(): JeedomCommand[] {
     return this.device.cmds ? this.device.cmds.filter(cmd => cmd.type === 'action') : [];
+  }
+
+  countCommands(): number {
+    return this.getInfoCommands().length + this.getActionCommands().length;
   }
 
   executeCommand(cmd: JeedomCommand): void {

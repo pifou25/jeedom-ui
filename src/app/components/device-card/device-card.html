@@ -1,8 +1,10 @@
 <div class="device-card">
     <h3>{{ device.name }}</h3>
-    <p>Type: {{ device.eqType_name }}</p>
+    <p>Type: {{ device.eqType_name }}
+      <span *ngIf="countCommands() > 0">({{ countCommands() }} commandes)</span>
+    </p>
     
-    <div *ngIf="isLoading" class="loading-spinner"></div>
+    <div *ngIf="isExecuting" class="loading-spinner"></div>
     
     <div *ngIf="errorMessage" class="alert alert-danger">
       {{ errorMessage }}
@@ -10,7 +12,7 @@
     
     <div *ngFor="let cmd of getInfoCommands()">
       <div *ngIf="cmd.isVisible">
-        <strong>{{ cmd.name }}:</strong> {{ cmd.value }} {{ cmd.unit }}
+        <strong>{{ cmd.name }}:</strong> {{ cmd.currentValue }} {{ cmd.unite }}
       </div>
     </div>
     

@@ -5,7 +5,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "demo": {
+    "jeedom-ui": {
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -34,7 +34,7 @@
               }],
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "outputPath": "dist/demo",
+            "outputPath": "dist/jeedom-ui",
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": ["src/global_styles.css"],
@@ -45,10 +45,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "development": {
-              "buildTarget": "demo:build:development"
+              "buildTarget": "jeedom-ui:build:development"
             },
             "production": {
-              "buildTarget": "demo:build:production"
+              "buildTarget": "jeedom-ui:build:production"
             }
           },
           "defaultConfiguration": "development"

@@ -14,15 +14,20 @@
     
     <div *ngIf="!isLoading && !errorMessage">
       <div class="navbar" id="topmenu">
-        <a href="" *ngFor="let room of rooms"> {{ room.name }} </a>
+        <a href="?room={{ room.id }}" *ngFor="let room of rooms"> {{ room.name }} </a>
       </div>
 
-      <div *ngFor="let room of rooms">
+      <div class="room" *ngFor="let room of rooms">
           <app-room [room]="room"></app-room>
       </div>
       
-      <div class="card" *ngIf="getDevicesWithoutRoom().length > 0">
-        <h2>Équipements sans pièce</h2>
+      <div class="room" *ngIf="getDevicesWithoutRoom().length > 0">
+        <div class="room-header">
+          <h2>Équipements sans pièce</h2>
+          <span class="device-count">
+            {{ getDevicesWithoutRoom().length }} équipement(s)
+          </span>
+        </div>
         <div class="device-grid">
           <app-device-card 
             *ngFor="let device of getDevicesWithoutRoom()" 
@@ -30,6 +35,11 @@
             (refresh)="refreshDevices()"
           ></app-device-card>
         </div>
+      </div>
+
+      <!-- Message si aucun équipement n'est disponible -->
+      <div *ngIf="devices.length === 0" class="room">
+        <p class="no-devices">Aucun équipement disponible</p>
       </div>
     </div>
 </div>

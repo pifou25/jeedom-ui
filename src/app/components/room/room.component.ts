@@ -38,10 +38,15 @@ export class RoomComponent {
     this.errorMessage = '';
 
     // Charger les équipements de la pièce
-    this.jeedomApiService.getDevicesByRoom( this.room.id).subscribe({
-      next: (devices) => {
-        this.devices = devices.filter( device => device.isEnable && device.isVisible);
-        console.debug( `${this.devices.length } devices loaded for ${this.room.name} (${this.room.id})`);
+    this.jeedomApiService.getFullRoom( this.room.id).subscribe({
+      next: (room) => {
+
+        if(!room.eqLogics || room.eqLogics.length == 0){
+          this.errorMessage = 'Aucun device.'
+        } else {
+          this.devices = room.eqLogics.filter( device => device.isEnable && device.isVisible);
+          console.debug( `${this.devices.length } devices loaded for ${this.room.name} (${this.room.id})`);
+        }
         this.isLoading = false;
       },
       error: (error) => {
@@ -49,6 +54,10 @@ export class RoomComponent {
         this.isLoading = false;
       }
     });
+  }
+
+  countInvisibleDevices(): number {
+    return this.devices.filter( device => !device.isVisible).length;
   }
 
   getDevicesForRoom(): JeedomDevice[] {

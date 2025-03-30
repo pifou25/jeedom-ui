@@ -40,13 +40,15 @@ export interface JeedomCommand {
   isVisible: boolean;
   isHistorized: boolean;
   value?: any;
-  unit?: string;
+  currentValue?: any;
+  unite?: string;
 }
 
 export interface JeedomRoom {
   id: string;
   name: string;
   isVisible: boolean;
+  eqLogics: JeedomDevice[];
 }
 
 export interface JeedomPlugin {
