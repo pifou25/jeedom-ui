@@ -20,7 +20,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copy the built application
-COPY --from=builder /app/dist/demo /usr/share/nginx/html
+COPY --from=builder /app/dist/jeedom-ui /usr/share/nginx/html
 
 # Copy custom Nginx configuration if needed
 COPY nginx.conf /etc/nginx/conf.d/default.conf
