@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { JeedomApiService } from '../../services/jeedom-api.service';
 import { JeedomDevice, JeedomRoom } from '../../models/jeedom.model';
 import { DeviceCardComponent } from '../device-card/device-card.component';
@@ -9,7 +9,7 @@ import { RoomComponent } from '../room/room.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RoomComponent, DeviceCardComponent],
+  imports: [CommonModule, RoomComponent, DeviceCardComponent, RouterLink, RouterLinkActive],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })

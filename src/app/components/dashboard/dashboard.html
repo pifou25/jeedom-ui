@@ -14,7 +14,7 @@
     
     <div *ngIf="!isLoading && !errorMessage">
       <div class="navbar" id="topmenu">
-        <a href="?room={{ room.id }}" *ngFor="let room of rooms"> {{ room.name }} </a>
+        <a routerLink="/dashboard/{{ room.id }}" routerLinkActive="activebutton" ariaCurrentWhenActive="page" *ngFor="let room of rooms"> {{ room.name }} </a>
       </div>
 
       <div class="room" *ngFor="let room of rooms">
