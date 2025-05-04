@@ -1,3 +1,4 @@
+# stable server for production built on nginx:alpine
 name: Docker Build and Push
 
 on:

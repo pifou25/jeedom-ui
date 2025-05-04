@@ -1,3 +1,10 @@
+<img align="right" src="https://raw.githubusercontent.com/pifou25/docker-jeedom/master/public/img/favicon.ico" width="100" height="100" />
+
+[![Docker Build and Push](https://github.com/pifou25/jeedom-ui/actions/workflows/docker-build.yml/badge.svg?branch=master)](https://github.com/pifou25/jeedom-ui/actions/workflows/docker-build.yml)
+![Docker Pulls](https://img.shields.io/docker/pulls/pifou25/jeedom-ui)
+![GitHub forks](https://img.shields.io/github/forks/pifou25/jeedom-ui)
+![GitHub Repo stars](https://img.shields.io/github/stars/pifou25/jeedom-ui)
+
 # Jeedom Angular User-Interface
 
 Fully compatible with [JSON RPC Jeedom API](https://doc.jeedom.com/fr_FR/core/4.4/jsonrpc_api)

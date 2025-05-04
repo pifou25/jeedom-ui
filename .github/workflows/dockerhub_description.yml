@@ -1,0 +1,30 @@
+name: Update Docker Hub Description
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - README.md
+      - .github/workflows/dockerhub-description.yml
+  # this is to manually trigger the worklow
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Reason'     
+        default: 'Manual launch'
+
+jobs:
+  dockerHubDescription:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Update Docker Hub Description
+      # This job updates the Docker Hub description and short-desc
+      # https://github.com/marketplace/actions/docker-hub-description
+      uses: peter-evans/dockerhub-description@v4.0.0
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+        repository: pifou25/jeedom-ui
+        short-description: ${{ github.event.repository.description }}
