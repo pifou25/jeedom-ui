@@ -1,3 +1,4 @@
+# development server with node use ng serve to run the app
 name: Docker Build and Push Dev image
 
 on:
