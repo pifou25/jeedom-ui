@@ -30,7 +30,7 @@ jobs:
         # https://github.com/marketplace/actions/netlify-actions
         uses: nwtgck/actions-netlify@v3.0
         with:
-          publish-dir: './dist/jeedom-ui'
+          publish-dir: './dist/jeedom-ui/browser'
           production-branch: netlify
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
