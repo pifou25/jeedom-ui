@@ -28,6 +28,8 @@ The `Dockerfile.dev` is for development only: build and serve the code over WSL,
 # Open API Jeedom API Specification
 The Open API Jeedom API Specification is available at: https://raw.githubusercontent.com/pifou25/jeedom-ui/master/public/api/jeedomApiRpc.yaml
 
+The result is puublished as a swagger-ui at: https://pifou25.github.io/jeedom-ui/
+
 ## Generate Angular client
 First generate the complete model with API interface
 ```
