@@ -1,5 +1,5 @@
 # Stage 1: Build the Angular application
-FROM node:20-alpine as builder
+FROM node:20-alpine AS builder
 
 # Set working directory
 WORKDIR /app
@@ -33,4 +33,7 @@ LABEL org.opencontainers.image.description="Angular standalone interface for Jee
 LABEL org.opencontainers.image.licenses=MIT
 
 # Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]
+# When the container starts, replace the env.js with values from environment variables
+CMD ["/bin/sh",  "-c", \
+  "envsubst < /usr/share/nginx/html/assets/env.template.js > /usr/share/nginx/html/assets/env.js && exec nginx -g 'daemon off;'"]
