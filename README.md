@@ -24,3 +24,20 @@ The `Dockerfile.dev` is for development only: build and serve the code over WSL,
 `docker build -t jeedom-ui-dev -f Dockerfile.env .`
 
 `docker run --name jeedom-ui-dev -v "$PWD":/app -p 4200:4200 --rm -ti jeedom-ui-dev`
+
+# Open API Jeedom API Specification
+The Open API Jeedom API Specification is available at: https://raw.githubusercontent.com/pifou25/jeedom-ui/master/public/api/jeedomApiRpc.yaml
+
+## Generate Angular client
+First generate the complete model with API interface
+```
+docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
+  -i /local/public/api/jeedomApiRpc.yaml \
+  -g typescript-angular \
+  -o /local/src/app/angular-client \
+  --additional-properties=providedInRoot=true,ngVersion=20.0.0
+```
+Second generate the API wrapper (requires NodeJS and packages fs and yaml)
+```
+node scripts/generate-api-wrapper.js
+```
