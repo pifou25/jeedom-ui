@@ -43,3 +43,5 @@ Second generate the API wrapper (requires NodeJS and packages fs and yaml)
 ```
 node scripts/generate-api-wrapper.js
 ```
+
+TODO: add some missing response types in the YAML file

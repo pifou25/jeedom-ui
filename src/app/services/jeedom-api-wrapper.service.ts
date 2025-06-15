@@ -1,246 +1,326 @@
+// Ce fichier est généré automatiquement à partir de jeedomApiRpc.yaml
+// Généré le : 2025-06-15T16:08:37.352Z
 import { Injectable } from '@angular/core';
 import { JsonRpcService } from './jeedom-rpc.service';
 import { Observable } from 'rxjs';
 import {
+  LogGetParam,
+  LogAddParam,
+  LogListParam,
+  LogEmptyParam,
+  LogRemoveParam,
+  DatastoreByTypeLinkIdKeyParam,
+  DatastoreSaveParam,
+  InteractTryToReplyParam,
+  CmdExecCmdParam,
+  CmdByIdParam,
+  CmdByEqLogicIdParam,
+  CmdGetStatistiqueParam,
+  CmdEventParam,
+  CmdSaveParam,
+  TimelineByFolderParam,
+  UserSaveParam,
+  PluginListPluginParam,
+  PluginInstallParam,
+  PluginRemoveParam,
+  PluginDependancyInfoParam,
+  PluginDependancyInstallParam,
+  PluginDeamonInfoParam,
+  PluginDeamonStartParam,
+  PluginDeamonStopParam,
+  PluginDeamonChangeAutoModeParam,
+  UpdateDoUpdateParam,
+  MessageAddParam,
+  EventChangesParam,
+  SummaryGlobalParam,
+  SummaryByIdParam,
+  EqLogicFullByIdParam,
+  EqLogicByIdParam,
+  EqLogicByTypeParam,
+  EqLogicByObjectIdParam,
+  EqLogicByTypeAndIdParam,
+  EqLogicSaveParam,
+  JeeObjectByIdParam,
+  JeeObjectFullByIdParam,
+  JeeObjectSaveParam,
+  ScenarioByIdParam,
+  ScenarioExportParam,
+  ScenarioImportParam,
+  ScenarioChangeStateParam,
+  ConfigByKeyParam,
+  ConfigSaveParam,
   JsonRpcRequest,
   JsonRpcResponse,
-  LogGet,
-  LogAdd,
-  LogList,
-  LogEmpty,
-  LogRemove,
-  DatastoreByTypeLinkIdKey,
-  DatastoreSave,
-  InteractTryToReply,
-  CmdExecCmd,
-  CmdById,
-  CmdByEqLogicId,
-  CmdGetStatistique,
-  CmdEvent,
-  CmdSave,
-  TimelineByFolder,
-  UserSave,
-  PluginListPlugin,
-  PluginInstall,
-  PluginRemove,
-  PluginDependancyInfo,
-  PluginDependancyInstall,
-  PluginDeamonInfo,
-  PluginDeamonStart,
-  PluginDeamonStop,
-  PluginDeamonChangeAutoMode,
-  UpdateDoUpdate,
-  MessageAdd,
-  EventChanges,
-  SummaryGlobal,
-  SummaryById,
-  EqLogicFullById,
-  EqLogicById,
-  EqLogicByType,
-  EqLogicByObjectId,
-  EqLogicByTypeAndId,
-  EqLogicSave,
-  JeeObjectById,
-  JeeObjectFullById,
-  JeeObjectSave,
-  ScenarioById,
-  ScenarioExport,
-  ScenarioImport,
-  ScenarioChangeState,
-  ConfigByKey,
-  ConfigSave,
+  EqLogicByIdResponse,
+  EqLogicFullByIdResponse,
+  CmdByIdResponse,
+  CmdGetStatistiqueResponse,
+  CmdSaveResponse,
+  ScenarioByIdResponse,
 } from '../angular-client';
 
 @Injectable({ providedIn: 'root' })
 export class JeedomApiWrapperService {
   constructor(private rpc: JsonRpcService) {}
 
-  jsonRpcRequest(params: JsonRpcRequest): Observable<any> {
-    return this.rpc.call('Json::Rpc::Request', params);
+  // Méthodes générées automatiquement à partir des schémas Jeedom API
+
+  // Chaque méthode correspond à un schéma dans jeedomApiRpc.yaml
+
+  logGet(params: LogGetParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.LogGet, params);
   }
 
-  jsonRpcResponse(params: JsonRpcResponse): Observable<any> {
-    return this.rpc.call('Json::Rpc::Response', params);
+  logAdd(params: LogAddParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.LogAdd, params);
   }
 
-  logGet(params: LogGet): Observable<any> {
-    return this.rpc.call('Log::Get', params);
+  logList(params: LogListParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.LogList, params);
   }
 
-  logAdd(params: LogAdd): Observable<any> {
-    return this.rpc.call('Log::Add', params);
+  logEmpty(params: LogEmptyParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.LogEmpty, params);
   }
 
-  logList(params: LogList): Observable<any> {
-    return this.rpc.call('Log::List', params);
+  logRemove(params: LogRemoveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.LogRemove, params);
   }
 
-  logEmpty(params: LogEmpty): Observable<any> {
-    return this.rpc.call('Log::Empty', params);
+  datastoreByTypeLinkIdKey(params: DatastoreByTypeLinkIdKeyParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.DatastoreByTypeLinkIdKey, params);
   }
 
-  logRemove(params: LogRemove): Observable<any> {
-    return this.rpc.call('Log::Remove', params);
+  datastoreSave(params: DatastoreSaveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.DatastoreSave, params);
   }
 
-  datastoreByTypeLinkIdKey(params: DatastoreByTypeLinkIdKey): Observable<any> {
-    return this.rpc.call('Datastore::By::Type::Link::Id::Key', params);
+  interactTryToReply(params: InteractTryToReplyParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.InteractTryToReply, params);
   }
 
-  datastoreSave(params: DatastoreSave): Observable<any> {
-    return this.rpc.call('Datastore::Save', params);
+  interactQueryAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.InteractQueryAll);
   }
 
-  interactTryToReply(params: InteractTryToReply): Observable<any> {
-    return this.rpc.call('Interact::Try::To::Reply', params);
+  cmdExecCmd(params: CmdExecCmdParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.CmdExecCmd, params);
   }
 
-  cmdExecCmd(params: CmdExecCmd): Observable<any> {
-    return this.rpc.call('Cmd::Exec::Cmd', params);
+  cmdById(params: CmdByIdParam): Observable<CmdByIdResponse> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.CmdById, params);
   }
 
-  cmdById(params: CmdById): Observable<any> {
-    return this.rpc.call('Cmd::By::Id', params);
+  cmdByEqLogicId(params: CmdByEqLogicIdParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.CmdByEqLogicId, params);
   }
 
-  cmdByEqLogicId(params: CmdByEqLogicId): Observable<any> {
-    return this.rpc.call('Cmd::By::Eq::Logic::Id', params);
+  cmdGetStatistique(params: CmdGetStatistiqueParam): Observable<CmdGetStatistiqueResponse> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.CmdGetStatistique, params);
   }
 
-  cmdGetStatistique(params: CmdGetStatistique): Observable<any> {
-    return this.rpc.call('Cmd::Get::Statistique', params);
+  cmdEvent(params: CmdEventParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.CmdEvent, params);
   }
 
-  cmdEvent(params: CmdEvent): Observable<any> {
-    return this.rpc.call('Cmd::Event', params);
+  cmdSave(params: CmdSaveParam): Observable<CmdSaveResponse> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.CmdSave, params);
   }
 
-  cmdSave(params: CmdSave): Observable<any> {
-    return this.rpc.call('Cmd::Save', params);
+  timelineAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.TimelineAll);
   }
 
-  timelineByFolder(params: TimelineByFolder): Observable<any> {
-    return this.rpc.call('Timeline::By::Folder', params);
+  timelineListFolder(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.TimelineListFolder);
   }
 
-  userSave(params: UserSave): Observable<any> {
-    return this.rpc.call('User::Save', params);
+  timelineByFolder(params: TimelineByFolderParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.TimelineByFolder, params);
   }
 
-  pluginListPlugin(params: PluginListPlugin): Observable<any> {
-    return this.rpc.call('Plugin::List::Plugin', params);
+  userAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.UserAll);
   }
 
-  pluginInstall(params: PluginInstall): Observable<any> {
-    return this.rpc.call('Plugin::Install', params);
+  userSave(params: UserSaveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.UserSave, params);
   }
 
-  pluginRemove(params: PluginRemove): Observable<any> {
-    return this.rpc.call('Plugin::Remove', params);
+  pluginListPlugin(params: PluginListPluginParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginListPlugin, params);
   }
 
-  pluginDependancyInfo(params: PluginDependancyInfo): Observable<any> {
-    return this.rpc.call('Plugin::Dependancy::Info', params);
+  pluginInstall(params: PluginInstallParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginInstall, params);
   }
 
-  pluginDependancyInstall(params: PluginDependancyInstall): Observable<any> {
-    return this.rpc.call('Plugin::Dependancy::Install', params);
+  pluginRemove(params: PluginRemoveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginRemove, params);
   }
 
-  pluginDeamonInfo(params: PluginDeamonInfo): Observable<any> {
-    return this.rpc.call('Plugin::Deamon::Info', params);
+  pluginDependancyInfo(params: PluginDependancyInfoParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginDependancyInfo, params);
   }
 
-  pluginDeamonStart(params: PluginDeamonStart): Observable<any> {
-    return this.rpc.call('Plugin::Deamon::Start', params);
+  pluginDependancyInstall(params: PluginDependancyInstallParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginDependancyInstall, params);
   }
 
-  pluginDeamonStop(params: PluginDeamonStop): Observable<any> {
-    return this.rpc.call('Plugin::Deamon::Stop', params);
+  pluginDeamonInfo(params: PluginDeamonInfoParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginDeamonInfo, params);
   }
 
-  pluginDeamonChangeAutoMode(params: PluginDeamonChangeAutoMode): Observable<any> {
-    return this.rpc.call('Plugin::Deamon::Change::Auto::Mode', params);
+  pluginDeamonStart(params: PluginDeamonStartParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginDeamonStart, params);
   }
 
-  updateDoUpdate(params: UpdateDoUpdate): Observable<any> {
-    return this.rpc.call('Update::Do::Update', params);
+  pluginDeamonStop(params: PluginDeamonStopParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginDeamonStop, params);
   }
 
-  messageAdd(params: MessageAdd): Observable<any> {
-    return this.rpc.call('Message::Add', params);
+  pluginDeamonChangeAutoMode(params: PluginDeamonChangeAutoModeParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginDeamonChangeAutoMode, params);
   }
 
-  eventChanges(params: EventChanges): Observable<any> {
-    return this.rpc.call('Event::Changes', params);
+  updateAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.UpdateAll);
   }
 
-  summaryGlobal(params: SummaryGlobal): Observable<any> {
-    return this.rpc.call('Summary::Global', params);
+  updateCheckUpdate(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.UpdateCheckUpdate);
   }
 
-  summaryById(params: SummaryById): Observable<any> {
-    return this.rpc.call('Summary::By::Id', params);
+  updateUpdate(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.UpdateUpdate);
   }
 
-  eqLogicFullById(params: EqLogicFullById): Observable<any> {
-    return this.rpc.call('Eq::Logic::Full::By::Id', params);
+  updateDoUpdate(params: UpdateDoUpdateParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.UpdateDoUpdate, params);
   }
 
-  eqLogicById(params: EqLogicById): Observable<any> {
-    return this.rpc.call('Eq::Logic::By::Id', params);
+  messageAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.MessageAll);
   }
 
-  eqLogicByType(params: EqLogicByType): Observable<any> {
-    return this.rpc.call('Eq::Logic::By::Type', params);
+  messageAdd(params: MessageAddParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.MessageAdd, params);
   }
 
-  eqLogicByObjectId(params: EqLogicByObjectId): Observable<any> {
-    return this.rpc.call('Eq::Logic::By::Object::Id', params);
+  messageRemoveAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.MessageRemoveAll);
   }
 
-  eqLogicByTypeAndId(params: EqLogicByTypeAndId): Observable<any> {
-    return this.rpc.call('Eq::Logic::By::Type::And::Id', params);
+  jeedomHalt(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeedomHalt);
   }
 
-  eqLogicSave(params: EqLogicSave): Observable<any> {
-    return this.rpc.call('Eq::Logic::Save', params);
+  jeedomReboot(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeedomReboot);
   }
 
-  jeeObjectById(params: JeeObjectById): Observable<any> {
-    return this.rpc.call('Jee::Object::By::Id', params);
+  jeedomIsOk(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeedomIsOk);
   }
 
-  jeeObjectFullById(params: JeeObjectFullById): Observable<any> {
-    return this.rpc.call('Jee::Object::Full::By::Id', params);
+  jeedomUpdate(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeedomUpdate);
   }
 
-  jeeObjectSave(params: JeeObjectSave): Observable<any> {
-    return this.rpc.call('Jee::Object::Save', params);
+  jeedomBackup(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeedomBackup);
   }
 
-  scenarioById(params: ScenarioById): Observable<any> {
-    return this.rpc.call('Scenario::By::Id', params);
+  jeedomGetUsbMapping(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeedomGetUsbMapping);
   }
 
-  scenarioExport(params: ScenarioExport): Observable<any> {
-    return this.rpc.call('Scenario::Export', params);
+  eventChanges(params: EventChangesParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EventChanges, params);
   }
 
-  scenarioImport(params: ScenarioImport): Observable<any> {
-    return this.rpc.call('Scenario::Import', params);
+  summaryGlobal(params: SummaryGlobalParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.SummaryGlobal, params);
   }
 
-  scenarioChangeState(params: ScenarioChangeState): Observable<any> {
-    return this.rpc.call('Scenario::Change::State', params);
+  summaryById(params: SummaryByIdParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.SummaryById, params);
   }
 
-  configByKey(params: ConfigByKey): Observable<any> {
-    return this.rpc.call('Config::By::Key', params);
+  eqLogicAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicAll);
   }
 
-  configSave(params: ConfigSave): Observable<any> {
-    return this.rpc.call('Config::Save', params);
+  eqLogicFullById(params: EqLogicFullByIdParam): Observable<EqLogicFullByIdResponse> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicFullById, params);
+  }
+
+  eqLogicById(params: EqLogicByIdParam): Observable<EqLogicByIdResponse> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicById, params);
+  }
+
+  eqLogicByType(params: EqLogicByTypeParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicByType, params);
+  }
+
+  eqLogicByObjectId(params: EqLogicByObjectIdParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicByObjectId, params);
+  }
+
+  eqLogicByTypeAndId(params: EqLogicByTypeAndIdParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicByTypeAndId, params);
+  }
+
+  eqLogicSave(params: EqLogicSaveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicSave, params);
+  }
+
+  jeeObjectAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeeObjectAll);
+  }
+
+  jeeObjectFull(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeeObjectFull);
+  }
+
+  jeeObjectById(params: JeeObjectByIdParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeeObjectById, params);
+  }
+
+  jeeObjectFullById(params: JeeObjectFullByIdParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeeObjectFullById, params);
+  }
+
+  jeeObjectSave(params: JeeObjectSaveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeeObjectSave, params);
+  }
+
+  scenarioAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ScenarioAll);
+  }
+
+  scenarioById(params: ScenarioByIdParam): Observable<ScenarioByIdResponse> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ScenarioById, params);
+  }
+
+  scenarioExport(params: ScenarioExportParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ScenarioExport, params);
+  }
+
+  scenarioImport(params: ScenarioImportParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ScenarioImport, params);
+  }
+
+  scenarioChangeState(params: ScenarioChangeStateParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ScenarioChangeState, params);
+  }
+
+  configByKey(params: ConfigByKeyParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ConfigByKey, params);
+  }
+
+  configSave(params: ConfigSaveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ConfigSave, params);
   }
 
 }
