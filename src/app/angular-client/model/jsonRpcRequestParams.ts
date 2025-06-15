@@ -7,51 +7,51 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { EqLogicById } from './eqLogicById';
-import { DatastoreByTypeLinkIdKey } from './datastoreByTypeLinkIdKey';
-import { JeeObjectFullById } from './jeeObjectFullById';
-import { ScenarioImport } from './scenarioImport';
-import { EqLogicByObjectId } from './eqLogicByObjectId';
-import { PluginListPlugin } from './pluginListPlugin';
-import { InteractTryToReply } from './interactTryToReply';
-import { TimelineByFolder } from './timelineByFolder';
-import { CmdExecCmd } from './cmdExecCmd';
-import { LogRemove } from './logRemove';
-import { ScenarioById } from './scenarioById';
-import { EventChanges } from './eventChanges';
-import { EqLogicByType } from './eqLogicByType';
-import { ConfigByKey } from './configByKey';
-import { ScenarioChangeState } from './scenarioChangeState';
-import { EqLogicByTypeAndId } from './eqLogicByTypeAndId';
-import { CmdSave } from './cmdSave';
-import { ConfigSave } from './configSave';
-import { DatastoreSave } from './datastoreSave';
-import { PluginDeamonInfo } from './pluginDeamonInfo';
-import { CmdByEqLogicId } from './cmdByEqLogicId';
-import { LogAdd } from './logAdd';
-import { EqLogicSave } from './eqLogicSave';
-import { LogEmpty } from './logEmpty';
-import { PluginDependancyInstall } from './pluginDependancyInstall';
-import { PluginRemove } from './pluginRemove';
-import { PluginInstall } from './pluginInstall';
-import { JeeObjectById } from './jeeObjectById';
-import { EqLogicFullById } from './eqLogicFullById';
-import { SummaryGlobal } from './summaryGlobal';
-import { CmdById } from './cmdById';
-import { CmdGetStatistique } from './cmdGetStatistique';
-import { LogGet } from './logGet';
-import { PluginDeamonStart } from './pluginDeamonStart';
-import { UpdateDoUpdate } from './updateDoUpdate';
-import { LogList } from './logList';
-import { MessageAdd } from './messageAdd';
-import { PluginDeamonStop } from './pluginDeamonStop';
-import { PluginDependancyInfo } from './pluginDependancyInfo';
-import { ScenarioExport } from './scenarioExport';
-import { CmdEvent } from './cmdEvent';
-import { JeeObjectSave } from './jeeObjectSave';
-import { PluginDeamonChangeAutoMode } from './pluginDeamonChangeAutoMode';
-import { SummaryById } from './summaryById';
-import { UserSave } from './userSave';
+import { EventChangesParam } from './eventChangesParam';
+import { LogEmptyParam } from './logEmptyParam';
+import { MessageAddParam } from './messageAddParam';
+import { CmdGetStatistiqueParam } from './cmdGetStatistiqueParam';
+import { PluginDeamonInfoParam } from './pluginDeamonInfoParam';
+import { ScenarioChangeStateParam } from './scenarioChangeStateParam';
+import { CmdByEqLogicIdParam } from './cmdByEqLogicIdParam';
+import { CmdSaveParam } from './cmdSaveParam';
+import { LogRemoveParam } from './logRemoveParam';
+import { JeeObjectByIdParam } from './jeeObjectByIdParam';
+import { LogGetParam } from './logGetParam';
+import { InteractTryToReplyParam } from './interactTryToReplyParam';
+import { PluginInstallParam } from './pluginInstallParam';
+import { PluginRemoveParam } from './pluginRemoveParam';
+import { EqLogicByTypeAndIdParam } from './eqLogicByTypeAndIdParam';
+import { EqLogicFullByIdParam } from './eqLogicFullByIdParam';
+import { LogListParam } from './logListParam';
+import { ConfigSaveParam } from './configSaveParam';
+import { ScenarioExportParam } from './scenarioExportParam';
+import { TimelineByFolderParam } from './timelineByFolderParam';
+import { CmdExecCmdParam } from './cmdExecCmdParam';
+import { CmdByIdParam } from './cmdByIdParam';
+import { PluginDeamonStartParam } from './pluginDeamonStartParam';
+import { PluginDependancyInfoParam } from './pluginDependancyInfoParam';
+import { EqLogicByTypeParam } from './eqLogicByTypeParam';
+import { UserSaveParam } from './userSaveParam';
+import { SummaryByIdParam } from './summaryByIdParam';
+import { PluginDeamonStopParam } from './pluginDeamonStopParam';
+import { CmdEventParam } from './cmdEventParam';
+import { LogAddParam } from './logAddParam';
+import { DatastoreByTypeLinkIdKeyParam } from './datastoreByTypeLinkIdKeyParam';
+import { EqLogicByObjectIdParam } from './eqLogicByObjectIdParam';
+import { ConfigByKeyParam } from './configByKeyParam';
+import { EqLogicSaveParam } from './eqLogicSaveParam';
+import { JeeObjectFullByIdParam } from './jeeObjectFullByIdParam';
+import { SummaryGlobalParam } from './summaryGlobalParam';
+import { UpdateDoUpdateParam } from './updateDoUpdateParam';
+import { PluginListPluginParam } from './pluginListPluginParam';
+import { DatastoreSaveParam } from './datastoreSaveParam';
+import { ScenarioByIdParam } from './scenarioByIdParam';
+import { EqLogicByIdParam } from './eqLogicByIdParam';
+import { ScenarioImportParam } from './scenarioImportParam';
+import { PluginDeamonChangeAutoModeParam } from './pluginDeamonChangeAutoModeParam';
+import { PluginDependancyInstallParam } from './pluginDependancyInstallParam';
+import { JeeObjectSaveParam } from './jeeObjectSaveParam';
 
 
 /**
@@ -62,5 +62,5 @@ import { UserSave } from './userSave';
  * Utiliser les paramètres correspondant à la méthode sélectionnée, ex: `cmd::execCmd` = `CmdExecCmdParams` 
  * @export
  */
-export type JsonRpcRequestParams = CmdByEqLogicId | CmdById | CmdEvent | CmdExecCmd | CmdGetStatistique | CmdSave | ConfigByKey | ConfigSave | DatastoreByTypeLinkIdKey | DatastoreSave | EqLogicById | EqLogicByObjectId | EqLogicByType | EqLogicByTypeAndId | EqLogicFullById | EqLogicSave | EventChanges | InteractTryToReply | JeeObjectById | JeeObjectFullById | JeeObjectSave | LogAdd | LogEmpty | LogGet | LogList | LogRemove | MessageAdd | PluginDeamonChangeAutoMode | PluginDeamonInfo | PluginDeamonStart | PluginDeamonStop | PluginDependancyInfo | PluginDependancyInstall | PluginInstall | PluginListPlugin | PluginRemove | ScenarioById | ScenarioChangeState | ScenarioExport | ScenarioImport | SummaryById | SummaryGlobal | TimelineByFolder | UpdateDoUpdate | UserSave | object;
+export type JsonRpcRequestParams = CmdByEqLogicIdParam | CmdByIdParam | CmdEventParam | CmdExecCmdParam | CmdGetStatistiqueParam | CmdSaveParam | ConfigByKeyParam | ConfigSaveParam | DatastoreByTypeLinkIdKeyParam | DatastoreSaveParam | EqLogicByIdParam | EqLogicByObjectIdParam | EqLogicByTypeAndIdParam | EqLogicByTypeParam | EqLogicFullByIdParam | EqLogicSaveParam | EventChangesParam | InteractTryToReplyParam | JeeObjectByIdParam | JeeObjectFullByIdParam | JeeObjectSaveParam | LogAddParam | LogEmptyParam | LogGetParam | LogListParam | LogRemoveParam | MessageAddParam | PluginDeamonChangeAutoModeParam | PluginDeamonInfoParam | PluginDeamonStartParam | PluginDeamonStopParam | PluginDependancyInfoParam | PluginDependancyInstallParam | PluginInstallParam | PluginListPluginParam | PluginRemoveParam | ScenarioByIdParam | ScenarioChangeStateParam | ScenarioExportParam | ScenarioImportParam | SummaryByIdParam | SummaryGlobalParam | TimelineByFolderParam | UpdateDoUpdateParam | UserSaveParam | object;
 

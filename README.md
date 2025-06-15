@@ -37,9 +37,12 @@ docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
   -i /local/public/api/jeedomApiRpc.yaml \
   -g typescript-angular \
   -o /local/src/app/angular-client \
-  --additional-properties=providedInRoot=true,ngVersion=20.0.0
+  --additional-properties=providedInRoot=true,ngVersion=20.0.0,generateAliasAsModel=true
 ```
 Second generate the API wrapper (requires NodeJS and packages fs and yaml)
 ```
 node scripts/generate-api-wrapper.js
 ```
+
+The YAML contains one single API endpoint, and all schema for parameters and responses.
+Some responses are arrays which items are objects with a `title` property. The parameter `generateAliasAsModel` is set to `true` to generate a model for each of these objects with the title as name.

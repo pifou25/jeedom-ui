@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { JeedomApiService } from '../../services/jeedom-api.service';
+import { JeedomApiWrapperService } from '../../services/jeedom-api-wrapper.service';
 import { JeedomDevice, JeedomRoom } from '../../models/jeedom.model';
 import { DeviceCardComponent } from '../device-card/device-card.component';
 import { RoomComponent } from '../room/room.component';
@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private jeedomApiService: JeedomApiService,
+    private jeedomApiService: JeedomApiWrapperService,
     private router: Router
   ) {}
 
@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
     this.errorMessage = '';
     
     // Charger les pièces
-    this.jeedomApiService.getRooms().subscribe({
+    this.jeedomApiService.jeeObjectAll().subscribe({
       next: (rooms) => {
         this.rooms = rooms.filter(room => room.isVisible);
         

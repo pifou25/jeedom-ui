@@ -1,246 +1,405 @@
+// Ce fichier est généré automatiquement à partir de jeedomApiRpc.yaml
+// Généré le : 2025-06-18T05:31:25.004Z
 import { Injectable } from '@angular/core';
 import { JsonRpcService } from './jeedom-rpc.service';
 import { Observable } from 'rxjs';
 import {
+  LogGetParam,
+  LogAddParam,
+  LogListParam,
+  LogEmptyParam,
+  LogRemoveParam,
+  DatastoreByTypeLinkIdKeyParam,
+  DatastoreSaveParam,
+  InteractTryToReplyParam,
+  CmdExecCmdParam,
+  CmdByIdParam,
+  CmdByEqLogicIdParam,
+  CmdGetStatistiqueParam,
+  CmdEventParam,
+  CmdSaveParam,
+  TimelineByFolderParam,
+  UserSaveParam,
+  PluginListPluginParam,
+  PluginInstallParam,
+  PluginRemoveParam,
+  PluginDependancyInfoParam,
+  PluginDependancyInstallParam,
+  PluginDeamonInfoParam,
+  PluginDeamonStartParam,
+  PluginDeamonStopParam,
+  PluginDeamonChangeAutoModeParam,
+  UpdateDoUpdateParam,
+  MessageAddParam,
+  EventChangesParam,
+  SummaryGlobalParam,
+  SummaryByIdParam,
+  EqLogicFullByIdParam,
+  EqLogicByIdParam,
+  EqLogicByTypeParam,
+  EqLogicByObjectIdParam,
+  EqLogicByTypeAndIdParam,
+  EqLogicSaveParam,
+  JeeObjectByIdParam,
+  JeeObjectFullByIdParam,
+  JeeObjectSaveParam,
+  ScenarioByIdParam,
+  ScenarioExportParam,
+  ScenarioImportParam,
+  ScenarioChangeStateParam,
+  ConfigByKeyParam,
+  ConfigSaveParam,
   JsonRpcRequest,
   JsonRpcResponse,
-  LogGet,
-  LogAdd,
-  LogList,
-  LogEmpty,
-  LogRemove,
-  DatastoreByTypeLinkIdKey,
-  DatastoreSave,
-  InteractTryToReply,
-  CmdExecCmd,
-  CmdById,
-  CmdByEqLogicId,
-  CmdGetStatistique,
-  CmdEvent,
-  CmdSave,
-  TimelineByFolder,
-  UserSave,
-  PluginListPlugin,
-  PluginInstall,
-  PluginRemove,
-  PluginDependancyInfo,
-  PluginDependancyInstall,
-  PluginDeamonInfo,
-  PluginDeamonStart,
-  PluginDeamonStop,
-  PluginDeamonChangeAutoMode,
-  UpdateDoUpdate,
-  MessageAdd,
-  EventChanges,
-  SummaryGlobal,
-  SummaryById,
-  EqLogicFullById,
-  EqLogicById,
-  EqLogicByType,
-  EqLogicByObjectId,
-  EqLogicByTypeAndId,
-  EqLogicSave,
-  JeeObjectById,
-  JeeObjectFullById,
-  JeeObjectSave,
-  ScenarioById,
-  ScenarioExport,
-  ScenarioImport,
-  ScenarioChangeState,
-  ConfigByKey,
-  ConfigSave,
+  JeeObjectAllResponse,
+  JeeObjectByIdResponse,
+  EqLogicAllResponse,
+  EqLogicByIdResponse,
+  EqLogicByObjectIdResponse,
+  EqLogicByTypeResponse,
+  EqLogicByTypeAndIdResponse,
+  CmdByIdResponse,
+  CmdByEqLogicIdResponse,
+  CmdAllResponse,
+  CmdExecCmdResponse,
+  CmdGetStatistiqueResponse,
+  CmdSaveResponse,
+  ScenarioByIdResponse,
+  ScenarioAllResponse,
+  UpdateCheckUpdateResponses,
+  LogGetResponse,
+  LogListResponse,
+  UserAllResponses,
+  UpdateAllResponses,
+  PluginListPluginResponses,
 } from '../angular-client';
 
 @Injectable({ providedIn: 'root' })
 export class JeedomApiWrapperService {
   constructor(private rpc: JsonRpcService) {}
 
-  jsonRpcRequest(params: JsonRpcRequest): Observable<any> {
-    return this.rpc.call('Json::Rpc::Request', params);
+  // Méthodes générées automatiquement à partir des schémas Jeedom API
+
+  // Chaque méthode correspond à un schéma dans jeedomApiRpc.yaml
+
+// La méthode logGet retourne une liste de LogGetResponse
+  logGet(params: LogGetParam): Observable<LogGetResponse[]> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.LogGet, params);
   }
 
-  jsonRpcResponse(params: JsonRpcResponse): Observable<any> {
-    return this.rpc.call('Json::Rpc::Response', params);
+// La méthode logAdd n'a pas de réponse définie, elle retourne 'any'
+  logAdd(params: LogAddParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.LogAdd, params);
   }
 
-  logGet(params: LogGet): Observable<any> {
-    return this.rpc.call('Log::Get', params);
+// La méthode logList retourne une liste de LogListResponse
+  logList(params: LogListParam): Observable<LogListResponse[]> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.LogList, params);
   }
 
-  logAdd(params: LogAdd): Observable<any> {
-    return this.rpc.call('Log::Add', params);
+// La méthode logEmpty n'a pas de réponse définie, elle retourne 'any'
+  logEmpty(params: LogEmptyParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.LogEmpty, params);
   }
 
-  logList(params: LogList): Observable<any> {
-    return this.rpc.call('Log::List', params);
+// La méthode logRemove n'a pas de réponse définie, elle retourne 'any'
+  logRemove(params: LogRemoveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.LogRemove, params);
   }
 
-  logEmpty(params: LogEmpty): Observable<any> {
-    return this.rpc.call('Log::Empty', params);
+// La méthode datastoreByTypeLinkIdKey n'a pas de réponse définie, elle retourne 'any'
+  datastoreByTypeLinkIdKey(params: DatastoreByTypeLinkIdKeyParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.DatastoreByTypeLinkIdKey, params);
   }
 
-  logRemove(params: LogRemove): Observable<any> {
-    return this.rpc.call('Log::Remove', params);
+// La méthode datastoreSave n'a pas de réponse définie, elle retourne 'any'
+  datastoreSave(params: DatastoreSaveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.DatastoreSave, params);
   }
 
-  datastoreByTypeLinkIdKey(params: DatastoreByTypeLinkIdKey): Observable<any> {
-    return this.rpc.call('Datastore::By::Type::Link::Id::Key', params);
+// La méthode interactTryToReply n'a pas de réponse définie, elle retourne 'any'
+  interactTryToReply(params: InteractTryToReplyParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.InteractTryToReply, params);
   }
 
-  datastoreSave(params: DatastoreSave): Observable<any> {
-    return this.rpc.call('Datastore::Save', params);
+// La méthode interactQueryAll n'a pas de réponse définie, elle retourne 'any'
+  interactQueryAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.InteractQueryAll);
   }
 
-  interactTryToReply(params: InteractTryToReply): Observable<any> {
-    return this.rpc.call('Interact::Try::To::Reply', params);
+// La méthode cmdExecCmd retourne une liste de CmdExecCmdResponse
+  cmdExecCmd(params: CmdExecCmdParam): Observable<CmdExecCmdResponse[]> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.CmdExecCmd, params);
   }
 
-  cmdExecCmd(params: CmdExecCmd): Observable<any> {
-    return this.rpc.call('Cmd::Exec::Cmd', params);
+// La méthode cmdById retourne un objet de type CmdByIdResponse
+  cmdById(params: CmdByIdParam): Observable<CmdByIdResponse> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.CmdById, params);
   }
 
-  cmdById(params: CmdById): Observable<any> {
-    return this.rpc.call('Cmd::By::Id', params);
+// La méthode cmdByEqLogicId retourne une liste de CmdByEqLogicIdResponse
+  cmdByEqLogicId(params: CmdByEqLogicIdParam): Observable<CmdByEqLogicIdResponse[]> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.CmdByEqLogicId, params);
   }
 
-  cmdByEqLogicId(params: CmdByEqLogicId): Observable<any> {
-    return this.rpc.call('Cmd::By::Eq::Logic::Id', params);
+// La méthode cmdGetStatistique retourne un objet de type CmdGetStatistiqueResponse
+  cmdGetStatistique(params: CmdGetStatistiqueParam): Observable<CmdGetStatistiqueResponse> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.CmdGetStatistique, params);
   }
 
-  cmdGetStatistique(params: CmdGetStatistique): Observable<any> {
-    return this.rpc.call('Cmd::Get::Statistique', params);
+// La méthode cmdEvent n'a pas de réponse définie, elle retourne 'any'
+  cmdEvent(params: CmdEventParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.CmdEvent, params);
   }
 
-  cmdEvent(params: CmdEvent): Observable<any> {
-    return this.rpc.call('Cmd::Event', params);
+// La méthode cmdSave retourne un objet de type CmdSaveResponse
+  cmdSave(params: CmdSaveParam): Observable<CmdSaveResponse> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.CmdSave, params);
   }
 
-  cmdSave(params: CmdSave): Observable<any> {
-    return this.rpc.call('Cmd::Save', params);
+// La méthode timelineAll n'a pas de réponse définie, elle retourne 'any'
+  timelineAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.TimelineAll);
   }
 
-  timelineByFolder(params: TimelineByFolder): Observable<any> {
-    return this.rpc.call('Timeline::By::Folder', params);
+// La méthode timelineListFolder n'a pas de réponse définie, elle retourne 'any'
+  timelineListFolder(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.TimelineListFolder);
   }
 
-  userSave(params: UserSave): Observable<any> {
-    return this.rpc.call('User::Save', params);
+// La méthode timelineByFolder n'a pas de réponse définie, elle retourne 'any'
+  timelineByFolder(params: TimelineByFolderParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.TimelineByFolder, params);
   }
 
-  pluginListPlugin(params: PluginListPlugin): Observable<any> {
-    return this.rpc.call('Plugin::List::Plugin', params);
+// La méthode userAll n'a pas de réponse définie, elle retourne 'any'
+  userAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.UserAll);
   }
 
-  pluginInstall(params: PluginInstall): Observable<any> {
-    return this.rpc.call('Plugin::Install', params);
+// La méthode userSave n'a pas de réponse définie, elle retourne 'any'
+  userSave(params: UserSaveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.UserSave, params);
   }
 
-  pluginRemove(params: PluginRemove): Observable<any> {
-    return this.rpc.call('Plugin::Remove', params);
+// La méthode pluginListPlugin n'a pas de réponse définie, elle retourne 'any'
+  pluginListPlugin(params: PluginListPluginParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginListPlugin, params);
   }
 
-  pluginDependancyInfo(params: PluginDependancyInfo): Observable<any> {
-    return this.rpc.call('Plugin::Dependancy::Info', params);
+// La méthode pluginInstall n'a pas de réponse définie, elle retourne 'any'
+  pluginInstall(params: PluginInstallParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginInstall, params);
   }
 
-  pluginDependancyInstall(params: PluginDependancyInstall): Observable<any> {
-    return this.rpc.call('Plugin::Dependancy::Install', params);
+// La méthode pluginRemove n'a pas de réponse définie, elle retourne 'any'
+  pluginRemove(params: PluginRemoveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginRemove, params);
   }
 
-  pluginDeamonInfo(params: PluginDeamonInfo): Observable<any> {
-    return this.rpc.call('Plugin::Deamon::Info', params);
+// La méthode pluginDependancyInfo n'a pas de réponse définie, elle retourne 'any'
+  pluginDependancyInfo(params: PluginDependancyInfoParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginDependancyInfo, params);
   }
 
-  pluginDeamonStart(params: PluginDeamonStart): Observable<any> {
-    return this.rpc.call('Plugin::Deamon::Start', params);
+// La méthode pluginDependancyInstall n'a pas de réponse définie, elle retourne 'any'
+  pluginDependancyInstall(params: PluginDependancyInstallParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginDependancyInstall, params);
   }
 
-  pluginDeamonStop(params: PluginDeamonStop): Observable<any> {
-    return this.rpc.call('Plugin::Deamon::Stop', params);
+// La méthode pluginDeamonInfo n'a pas de réponse définie, elle retourne 'any'
+  pluginDeamonInfo(params: PluginDeamonInfoParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginDeamonInfo, params);
   }
 
-  pluginDeamonChangeAutoMode(params: PluginDeamonChangeAutoMode): Observable<any> {
-    return this.rpc.call('Plugin::Deamon::Change::Auto::Mode', params);
+// La méthode pluginDeamonStart n'a pas de réponse définie, elle retourne 'any'
+  pluginDeamonStart(params: PluginDeamonStartParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginDeamonStart, params);
   }
 
-  updateDoUpdate(params: UpdateDoUpdate): Observable<any> {
-    return this.rpc.call('Update::Do::Update', params);
+// La méthode pluginDeamonStop n'a pas de réponse définie, elle retourne 'any'
+  pluginDeamonStop(params: PluginDeamonStopParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginDeamonStop, params);
   }
 
-  messageAdd(params: MessageAdd): Observable<any> {
-    return this.rpc.call('Message::Add', params);
+// La méthode pluginDeamonChangeAutoMode n'a pas de réponse définie, elle retourne 'any'
+  pluginDeamonChangeAutoMode(params: PluginDeamonChangeAutoModeParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.PluginDeamonChangeAutoMode, params);
   }
 
-  eventChanges(params: EventChanges): Observable<any> {
-    return this.rpc.call('Event::Changes', params);
+// La méthode updateAll n'a pas de réponse définie, elle retourne 'any'
+  updateAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.UpdateAll);
   }
 
-  summaryGlobal(params: SummaryGlobal): Observable<any> {
-    return this.rpc.call('Summary::Global', params);
+// La méthode updateCheckUpdate n'a pas de réponse définie, elle retourne 'any'
+  updateCheckUpdate(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.UpdateCheckUpdate);
   }
 
-  summaryById(params: SummaryById): Observable<any> {
-    return this.rpc.call('Summary::By::Id', params);
+// La méthode updateUpdate n'a pas de réponse définie, elle retourne 'any'
+  updateUpdate(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.UpdateUpdate);
   }
 
-  eqLogicFullById(params: EqLogicFullById): Observable<any> {
-    return this.rpc.call('Eq::Logic::Full::By::Id', params);
+// La méthode updateDoUpdate n'a pas de réponse définie, elle retourne 'any'
+  updateDoUpdate(params: UpdateDoUpdateParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.UpdateDoUpdate, params);
   }
 
-  eqLogicById(params: EqLogicById): Observable<any> {
-    return this.rpc.call('Eq::Logic::By::Id', params);
+// La méthode messageAll n'a pas de réponse définie, elle retourne 'any'
+  messageAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.MessageAll);
   }
 
-  eqLogicByType(params: EqLogicByType): Observable<any> {
-    return this.rpc.call('Eq::Logic::By::Type', params);
+// La méthode messageAdd n'a pas de réponse définie, elle retourne 'any'
+  messageAdd(params: MessageAddParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.MessageAdd, params);
   }
 
-  eqLogicByObjectId(params: EqLogicByObjectId): Observable<any> {
-    return this.rpc.call('Eq::Logic::By::Object::Id', params);
+// La méthode messageRemoveAll n'a pas de réponse définie, elle retourne 'any'
+  messageRemoveAll(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.MessageRemoveAll);
   }
 
-  eqLogicByTypeAndId(params: EqLogicByTypeAndId): Observable<any> {
-    return this.rpc.call('Eq::Logic::By::Type::And::Id', params);
+// La méthode jeedomHalt n'a pas de réponse définie, elle retourne 'any'
+  jeedomHalt(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeedomHalt);
   }
 
-  eqLogicSave(params: EqLogicSave): Observable<any> {
-    return this.rpc.call('Eq::Logic::Save', params);
+// La méthode jeedomReboot n'a pas de réponse définie, elle retourne 'any'
+  jeedomReboot(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeedomReboot);
   }
 
-  jeeObjectById(params: JeeObjectById): Observable<any> {
-    return this.rpc.call('Jee::Object::By::Id', params);
+// La méthode jeedomIsOk n'a pas de réponse définie, elle retourne 'any'
+  jeedomIsOk(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeedomIsOk);
   }
 
-  jeeObjectFullById(params: JeeObjectFullById): Observable<any> {
-    return this.rpc.call('Jee::Object::Full::By::Id', params);
+// La méthode jeedomUpdate n'a pas de réponse définie, elle retourne 'any'
+  jeedomUpdate(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeedomUpdate);
   }
 
-  jeeObjectSave(params: JeeObjectSave): Observable<any> {
-    return this.rpc.call('Jee::Object::Save', params);
+// La méthode jeedomBackup n'a pas de réponse définie, elle retourne 'any'
+  jeedomBackup(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeedomBackup);
   }
 
-  scenarioById(params: ScenarioById): Observable<any> {
-    return this.rpc.call('Scenario::By::Id', params);
+// La méthode jeedomGetUsbMapping n'a pas de réponse définie, elle retourne 'any'
+  jeedomGetUsbMapping(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeedomGetUsbMapping);
   }
 
-  scenarioExport(params: ScenarioExport): Observable<any> {
-    return this.rpc.call('Scenario::Export', params);
+// La méthode eventChanges n'a pas de réponse définie, elle retourne 'any'
+  eventChanges(params: EventChangesParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EventChanges, params);
   }
 
-  scenarioImport(params: ScenarioImport): Observable<any> {
-    return this.rpc.call('Scenario::Import', params);
+// La méthode summaryGlobal n'a pas de réponse définie, elle retourne 'any'
+  summaryGlobal(params: SummaryGlobalParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.SummaryGlobal, params);
   }
 
-  scenarioChangeState(params: ScenarioChangeState): Observable<any> {
-    return this.rpc.call('Scenario::Change::State', params);
+// La méthode summaryById n'a pas de réponse définie, elle retourne 'any'
+  summaryById(params: SummaryByIdParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.SummaryById, params);
   }
 
-  configByKey(params: ConfigByKey): Observable<any> {
-    return this.rpc.call('Config::By::Key', params);
+// La méthode eqLogicAll retourne une liste de EqLogicAllResponse
+  eqLogicAll(): Observable<EqLogicAllResponse[]> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicAll);
   }
 
-  configSave(params: ConfigSave): Observable<any> {
-    return this.rpc.call('Config::Save', params);
+// La méthode eqLogicFullById n'a pas de réponse définie, elle retourne 'any'
+  eqLogicFullById(params: EqLogicFullByIdParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicFullById, params);
+  }
+
+// La méthode eqLogicById retourne un objet de type EqLogicByIdResponse
+  eqLogicById(params: EqLogicByIdParam): Observable<EqLogicByIdResponse> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicById, params);
+  }
+
+// La méthode eqLogicByType retourne une liste de EqLogicByTypeResponse
+  eqLogicByType(params: EqLogicByTypeParam): Observable<EqLogicByTypeResponse[]> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicByType, params);
+  }
+
+// La méthode eqLogicByObjectId retourne une liste de EqLogicByObjectIdResponse
+  eqLogicByObjectId(params: EqLogicByObjectIdParam): Observable<EqLogicByObjectIdResponse[]> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicByObjectId, params);
+  }
+
+// La méthode eqLogicByTypeAndId retourne une liste de EqLogicByTypeAndIdResponse
+  eqLogicByTypeAndId(params: EqLogicByTypeAndIdParam): Observable<EqLogicByTypeAndIdResponse[]> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicByTypeAndId, params);
+  }
+
+// La méthode eqLogicSave n'a pas de réponse définie, elle retourne 'any'
+  eqLogicSave(params: EqLogicSaveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.EqLogicSave, params);
+  }
+
+// La méthode jeeObjectAll retourne une liste de JeeObjectAllResponse
+  jeeObjectAll(): Observable<JeeObjectAllResponse[]> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeeObjectAll);
+  }
+
+// La méthode jeeObjectFull n'a pas de réponse définie, elle retourne 'any'
+  jeeObjectFull(): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeeObjectFull);
+  }
+
+// La méthode jeeObjectById retourne un objet de type JeeObjectByIdResponse
+  jeeObjectById(params: JeeObjectByIdParam): Observable<JeeObjectByIdResponse> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeeObjectById, params);
+  }
+
+// La méthode jeeObjectFullById n'a pas de réponse définie, elle retourne 'any'
+  jeeObjectFullById(params: JeeObjectFullByIdParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeeObjectFullById, params);
+  }
+
+// La méthode jeeObjectSave n'a pas de réponse définie, elle retourne 'any'
+  jeeObjectSave(params: JeeObjectSaveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.JeeObjectSave, params);
+  }
+
+// La méthode scenarioAll retourne une liste de ScenarioAllResponse
+  scenarioAll(): Observable<ScenarioAllResponse[]> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ScenarioAll);
+  }
+
+// La méthode scenarioById retourne un objet de type ScenarioByIdResponse
+  scenarioById(params: ScenarioByIdParam): Observable<ScenarioByIdResponse> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ScenarioById, params);
+  }
+
+// La méthode scenarioExport n'a pas de réponse définie, elle retourne 'any'
+  scenarioExport(params: ScenarioExportParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ScenarioExport, params);
+  }
+
+// La méthode scenarioImport n'a pas de réponse définie, elle retourne 'any'
+  scenarioImport(params: ScenarioImportParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ScenarioImport, params);
+  }
+
+// La méthode scenarioChangeState n'a pas de réponse définie, elle retourne 'any'
+  scenarioChangeState(params: ScenarioChangeStateParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ScenarioChangeState, params);
+  }
+
+// La méthode configByKey n'a pas de réponse définie, elle retourne 'any'
+  configByKey(params: ConfigByKeyParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ConfigByKey, params);
+  }
+
+// La méthode configSave n'a pas de réponse définie, elle retourne 'any'
+  configSave(params: ConfigSaveParam): Observable<any> {
+    return this.rpc.call(JsonRpcRequest.MethodEnum.ConfigSave, params);
   }
 
 }
