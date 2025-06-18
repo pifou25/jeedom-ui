@@ -25,6 +25,8 @@ info:
         echo $jsonrpc->getError();
     }
     ```
+    /!\\ **Attention** : L’utilisation de l’API Jeedom nécessite une clé API valide. Vous pouvez la trouver dans votre interface Jeedom,
+     dans la section "Configuration" > "API". Assurez-vous de remplacer `#URL_JEEDOM#` et `#API_KEY#` par les valeurs appropriées.
   version: "1.0.0"
 servers:
   # configurer ici l'URL Jeedom, de la forme URL_JEEDOM/core/api/jeeApi.php
@@ -880,6 +882,42 @@ components:
       description: 'jeeObject::all – Retourne la liste de tous les objets Jeedom.'
       properties: {}
 
+    JeeObjectAllResponse:
+      type: array
+      description: 'Résultat de jeeObject::all – Liste de tous les objets.'
+      items:
+        $ref: '#/components/schemas/JeeObjectByIdResponse'
+
+    JeeObjectByIdResponse:
+      type: object
+      description: 'Résultat de jeeObject::byId – Un seul objet Jeedom.'
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        isVisible:
+          type: boolean
+        position:
+          type: integer
+        configuration:
+          type: object
+          description: 'Configuration de l’objet, liste de clés / valeurs'
+        display:
+          type: object
+        father_id:
+          type: integer
+        image:
+          type: object
+          description: 'Image de l’objet'
+        img:
+          type: string
+        eqLogics:
+          type: array
+          items:
+            $ref: '#/components/schemas/EqLogicByIdResponse'
+          description: 'Liste des équipements de l’objet. Non valorisé sauf pour Les méthodes "full"'
+
     JeeObjectFullParam:
       type: object
       description: 'jeeObject::full – Retourne tous les objets avec équipements et commandes (type info).'
@@ -1025,75 +1063,70 @@ components:
       type: array
       description: 'Résultat de eqLogic::all – Liste de tous les équipements.'
       items:
-        type: object
-        properties:
-          id:
-            type: integer
-          name:
-            type: string
-          eqType_name:
-            type: string
-          object_id:
-            type: integer
-          isEnable:
-            type: boolean
-          isVisible:
-            type: boolean
-          timeout:
-            type: integer
-          category:
-            type: object
-          configuration:
-            type: object
-          display:
-            type: object
+        $ref: '#/components/schemas/EqLogicByIdResponse'
 
     EqLogicByIdResponse:
       type: object
-      description: 'Résultat de eqLogic::byId – Un seul équipement.'
+      description: 'Résultat de eqLogic::byId – Un seul équipement. Peut avoir le détail des commandes avec eqLogic::fullById.'
       properties:
         id:
           type: integer
         name:
           type: string
-        eqType_name:
+        logicalId:
+          type: string
+        generic_type:
           type: string
         object_id:
           type: integer
-        isEnable:
-          type: boolean
+        eqType_name:
+          type: string
         isVisible:
           type: boolean
+        isEnable:
+          type: boolean
+        configuration:
+           description: 'Liste de Paramètres d’de configuration de l’équipement'
+           type: array
+           items:
+             type: string
         timeout:
           type: integer
         category:
-          type: object
-        configuration:
-          type: object
-        display:
-          type: object
-
-    EqLogicFullByIdResponse:
-      type: object
-      description: 'Résultat de eqLogic::fullById – Un équipement avec ses commandes.'
-      properties:
-        eqLogic:
-          $ref: '#/components/schemas/EqLogicByIdResponse'
-        cmd:
+          description: 'liste de catégories'
           type: array
           items:
-            type: object
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
-              type:
-                type: string
-              subType:
-                type: string
-              value:
-                type: string
+            type: string
+        display:
+          description: 'Liste de Paramètres d’affichage de l’équipement'
+          type: array
+          items:
+            type: string
+        order:
+          type: integer
+        commnent:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        status:
+          type: array
+          items:
+            type: string
+        cache:
+          type: array
+          items:
+            type: string
+        cmds:
+          description: 'Liste des commandes de l’équipement. Peut être vide si eqLogic::fullById n’est pas utilisé.'
+          type: array
+          items:
+            $ref: '#/components/schemas/CmdByIdResponse'
+          
+
+    EqLogicFullByIdResponse:
+      $ref: '#/components/schemas/EqLogicByIdResponse'
 
     EqLogicByObjectIdResponse:
       type: array
@@ -1118,27 +1151,45 @@ components:
       description: 'cmd::byId – Retourne une commande spécifique.'
       properties:
           id:
-              type: integer
-          name:
-              type: string
-          eqLogic_id:
-              type: integer
-          type:
-              type: string
-          subType:
-              type: string
+            type: integer
           logicalId:
+            type: string
+          generic_type:
+            type: string
+          eqType:
+            type: string
+          name:
+            type: string
+          order:
+            type: integer
+          type:
+            type: string
+          subType:
+            type: string
+          eqLogic_id:
+            type: integer
+          isHistorized:
+            type: boolean
+          unite:
+            type: string
+          configuration:
+            type: array
+            items:
+              type: string
+          display:
+            type: array
+            items:
               type: string
           value:
-              type: string
+            type: string
           isVisible:
-              type: boolean
-          isHistorized:
-              type: boolean
-          configuration:
-              type: object
-          display:
-              type: object
+            type: boolean
+          alert:
+            type: array
+            items:
+              type: string
+          currentValue:
+            type: string
 
     CmdByEqLogicIdResponse:
         type: array
@@ -1152,16 +1203,11 @@ components:
         items:
             $ref: '#/components/schemas/CmdByIdResponse'
 
-#    CmdExecCmdResponse:
-#        type: array
-#        description: 'cmd::execCmd – Retourne la valeur exécutée ou son résultat.'
-#        items:
-#          oneOf:
-#            - type: string
-#            - type: number
-#            - type: boolean
-#            - type: object
-#            - type: array
+    CmdExecCmdResponse:
+        type: array
+        description: 'cmd::execCmd – Retourne la valeur exécutée ou son résultat.'
+        items:
+          type: string
 
     CmdGetStatistiqueResponse:
         type: object
@@ -1237,39 +1283,13 @@ components:
         type: boolean
         description: 'scenario::changeState – Retourne true si le changement d’état a été effectué.'
 
-#    ConfigByKeyResponse:
-#        type: array
-#        description: 'config::byKey – Retourne la valeur d’une clé de configuration.'
-#        items:
-#          oneOf:
-#            - type: string
-#            - type: number
-#            - type: boolean
-#            - type: array
-#            - type: object
+    ConfigByKeyResponse:
+        type: string
+        description: 'config::byKey – Retourne la valeur d’une clé de configuration.'
 
     ConfigSaveResponse:
         type: boolean
         description: 'config::save – Retourne true si la configuration a été enregistrée.'
-
-    PluginListPluginResponse:
-        type: array
-        description: 'plugin::listPlugin – Liste des plugins installés.'
-        items:
-            type: object
-            properties:
-                id:
-                    type: string
-                name:
-                    type: string
-                status:
-                    type: string
-                version:
-                    type: string
-                isActive:
-                    type: boolean
-                category:
-                    type: string
 
     PluginInstallResponse:
         type: boolean
@@ -1330,24 +1350,12 @@ components:
         description: 'jeedom::getUsbMapping – Retourne le mappage des ports USB.'
         additionalProperties: true
 
-    UpdateAllResponse:
-        type: array
-        description: 'update::all – Liste des composants pouvant être mis à jour.'
-        items:
-            type: object
-            properties:
-                name:
-                    type: string
-                currentVersion:
-                    type: string
-                remoteVersion:
-                    type: string
-
-    UpdateCheckUpdateResponse:
+    UpdateCheckUpdateResponses:
         type: array
         description: 'update::checkUpdate – Liste des mises à jour disponibles.'
         items:
             type: object
+            title: UpdateCheckUpdateResponse
             properties:
                 plugin:
                     type: string
@@ -1363,3 +1371,154 @@ components:
     UpdateDoUpdateResponse:
         type: boolean
         description: 'update::doUpdate – Retourne true si la mise à jour du plugin a été exécutée.'
+
+    LogGetResponse:
+      type: array
+      description: 'log::get – Retourne le contenu d’un fichier de log.'
+      items:
+        type: string
+
+    LogListResponse:
+      type: array
+      description: 'log::list – Retourne la liste des fichiers de log disponibles.'
+      items:
+        type: string
+
+    UserAllResponses:
+      type: array
+      description: 'user::all – Liste de tous les utilisateurs.'
+      items:
+        type: object
+        title: UserAllResponse
+        properties:
+          id:
+            type: integer
+          login:
+            type: string
+          profile:
+            type: string
+          password:
+            type: string
+          options:
+            type: object
+            description: 'Options de l’utilisateur, liste de clés / valeurs'
+          rights:
+            type: array
+            description: 'Droits de l’utilisateur, liste de permissions'
+            items:
+              type: string
+          enable:
+            type: boolean
+          hash:
+            type: string
+
+    UpdateAllResponses:
+      type: array
+      description: 'update::all – Liste de tous les composants installés.'
+      items:
+        type: object
+        title: UpdateAllResponse
+        properties:
+          id:
+            type: integer
+          type:
+            type: string
+            description: 'Type de composant (plugin, core)'
+          logicalId:
+            type: string
+          name:
+            type: string
+          localVersion:
+            type: string
+            description: 'Version locale du composant (ou hash, ou date au format YYYY-MM-DD HH:mm:ss)'
+          remoteVersion:
+            type: string
+            description: 'Version distante du composant (ou hash, ou date au format YYYY-MM-DD HH:mm:ss)'
+          status:
+            type: string
+          configuration:
+            type: object
+            description: 'Configuration du composant, liste de clés / valeurs'
+          source:
+            type: string
+            description: 'Source du composant (market, github ...)'
+          updateDate:
+            type: string
+            description: 'Date de la dernière mise à jour (au format YYYY-MM-DD HH:mm:ss)'
+
+    PluginListPluginResponses:
+      type: array
+      description: 'plugin::listPlugin – Liste de tous les plugins installés.'
+      items:
+        type: object
+        title: PluginListPluginResponse
+        properties:
+          id:
+            type: integer
+          name:
+            type: string
+          description:
+            type: string
+          license:
+            type: string
+          installation:
+            type: string
+          author:
+            type: string
+          require:
+            type: string
+          requireOsVersion:
+            type: string
+          category:
+            type: string
+          filepath:
+            type: string
+            description: 'Chemin du fichier info.json du plugin'
+          index:
+            type: string
+          display:
+            type: string
+          mobile: 
+            type: string
+          eventjs:
+            type: integer
+          hasDependency:
+            type: boolean
+          hasTtsEngine:
+            type: boolean
+          maxDependancyInstallTime:
+            type: integer
+          hasOwnDeamon:
+            type: boolean
+          issue:
+            type: string
+            description: 'URL du dépôt github du plugin pour déclarer un bug'
+          changelog:
+            type: string
+            description: 'URL du changelog'
+          documentation:
+            type: string
+            description: 'URL de la documentation'
+          changelog_beta:
+            type: string
+            description: 'URL du changelog beta'
+          documentation_beta:
+            type: string
+            description: 'URL de la documentation beta'
+          source:
+            type: string
+            description: 'Source du plugin (market, github ...)'
+          whiteListFolders:
+            type: array
+            items:
+              type: string
+          specialAttributes:
+            type: object
+          info:
+            type: object
+          include:
+            type: object
+          functionality:
+            type: object
+          usedSpace:
+            type: integer
