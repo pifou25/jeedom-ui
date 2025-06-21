@@ -54,8 +54,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JsonRpcResponse'
+
+security:
+  - ApiKeyAuth: []
+
 components:
   schemas:
+    securitySchemes:
+      ApiKeyAuth:
+        type: apiKey
+        in: header         # json-RPC utilise le body pour l'identification mais ce n'est pas supporté par OpenAPI
+        name: X-API-Key    # ce header est donc inutile
+        description: |
+          Clé API pour authentifier les requêtes. Vous pouvez la trouver dans votre interface Jeedom,
+          dans la section "Configuration" > "API".
+
     JsonRpcRequest:
       type: object
       required:
@@ -250,8 +263,12 @@ components:
       type: object
       required:
         - log
+        - apiKey
       description: 'log::get – Récupère le contenu d’un log.'
-      properties:
+      properties: 
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         log:
           type: string
           description: Nom du log à récupérer
@@ -268,8 +285,12 @@ components:
         - log
         - type
         - message
+        - apiKey
       description: 'log::add – Écrit un message dans un log.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         log:
           type: string
           description: Nom du log
@@ -286,7 +307,12 @@ components:
     LogListParam:
       type: object
       description: 'log::list – Récupère la liste des logs de Jeedom.'
+      required:
+        - apiKey
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         filtre:
           type: string
           description: Filtre appliqué au nom des logs (optionnel)
@@ -295,8 +321,12 @@ components:
       type: object
       required:
         - log
+        - apiKey
       description: 'log::empty – Vide un log.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         log:
           type: string
           description: Nom du log à vider
@@ -305,8 +335,12 @@ components:
       type: object
       required:
         - log
+        - apiKey
       description: 'log::remove – Supprime un log.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         log:
           type: string
           description: Nom du log à supprimer
@@ -317,8 +351,12 @@ components:
         - type
         - linkId
         - key
+        - apiKey
       description: 'datastore::byTypeLinkIdKey – Récupère une valeur depuis le datastore.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         type:
           type: string
           description: 'Type de donnée (ex: scenario)'
@@ -336,8 +374,12 @@ components:
         - linkId
         - key
         - value
+        - apiKey
       description: 'datastore::save – Sauvegarde une valeur dans le datastore.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         type:
           type: string
           description: 'Type de donnée (ex: scenario)'
@@ -355,8 +397,12 @@ components:
       type: object
       required:
         - query
+        - apiKey
       description: 'interact::tryToReply – Analyse une requête et exécute l’action correspondante.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         query:
           type: string
           description: Phrase à analyser
@@ -373,8 +419,12 @@ components:
       type: object
       required:
         - id
+        - apiKey
       description: 'cmd::execCmd – Exécute une ou plusieurs commandes Jeedom.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: ID de la commande, ou tableau d’IDs
@@ -386,8 +436,12 @@ components:
       type: object
       required:
         - id
+        - apiKey
       description: 'cmd::byId – Retourne les détails d’une commande.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: ID de la commande
@@ -396,8 +450,12 @@ components:
       type: object
       required:
         - eqLogic_id
+        - apiKey
       description: 'cmd::byEqLogicId – Retourne toutes les commandes liées à un équipement.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         eqLogic_id:
           type: integer
           description: ID de l’équipement
@@ -408,8 +466,12 @@ components:
         - id
         - startTime
         - endTime
+        - apiKey
       description: 'cmd::getStatistique – Retourne les statistiques d’une commande historisée.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: ID de la commande
@@ -425,8 +487,12 @@ components:
       required:
         - id
         - value
+        - apiKey
       description: 'cmd::event – Envoie une valeur à une commande.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: ID de la commande
@@ -446,8 +512,12 @@ components:
         - type
         - subType
         - eqLogic_id
+        - apiKey
       description: 'cmd::save – Crée ou met à jour une commande.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: ID de la commande (vide si création)
@@ -514,8 +584,12 @@ components:
       type: object
       required:
         - folder
+        - apiKey
       description: 'timeline::byFolder – Retourne tous les éléments du dossier demandé.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         folder:
           type: string
           description: 'Nom du dossier à consulter'
@@ -531,8 +605,12 @@ components:
         - login
         - password
         - profile
+        - apiKey
       description: 'user::save – Crée ou édite un utilisateur.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: 'ID de l’utilisateur (obligatoire pour l’édition)'
@@ -548,8 +626,13 @@ components:
 
     PluginListPluginParam:
       type: object
+      required:
+        - apiKey
       description: 'plugin::listPlugin – Retourne la liste des plugins.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         activateOnly:
           type: integer
           description: '1 pour ne retourner que les plugins activés'
@@ -559,8 +642,13 @@ components:
 
     PluginInstallParam:
       type: object
+      required:
+        - apiKey
       description: 'plugin::install – Installe ou met à jour un plugin.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         plugin_id:
           type: integer
           description: 'ID du plugin'
@@ -570,8 +658,13 @@ components:
 
     PluginRemoveParam:
       type: object
+      required:
+        - apiKey
       description: 'plugin::remove – Supprime un plugin.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         plugin_id:
           type: integer
           description: 'ID du plugin'
@@ -581,8 +674,13 @@ components:
 
     PluginDependancyInfoParam:
       type: object
+      required:
+        - apiKey
       description: 'plugin::dependancyInfo – Renvoie le statut des dépendances du plugin.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         plugin_id:
           type: integer
           description: 'ID du plugin'
@@ -592,8 +690,13 @@ components:
 
     PluginDependancyInstallParam:
       type: object
+      required:
+        - apiKey
       description: 'plugin::dependancyInstall – Installe les dépendances du plugin.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         plugin_id:
           type: integer
           description: 'ID du plugin'
@@ -603,8 +706,13 @@ components:
 
     PluginDeamonInfoParam:
       type: object
+      required:
+        - apiKey
       description: 'plugin::deamonInfo – Renvoie le statut du démon du plugin.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         plugin_id:
           type: integer
           description: 'ID du plugin'
@@ -614,8 +722,13 @@ components:
 
     PluginDeamonStartParam:
       type: object
+      required:
+        - apiKey
       description: 'plugin::deamonStart – Démarre le démon du plugin.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         plugin_id:
           type: integer
           description: 'ID du plugin'
@@ -625,8 +738,13 @@ components:
 
     PluginDeamonStopParam:
       type: object
+      required:
+        - apiKey
       description: 'plugin::deamonStop – Arrête le démon du plugin.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         plugin_id:
           type: integer
           description: 'ID du plugin'
@@ -638,8 +756,12 @@ components:
       type: object
       required:
         - mode
+        - apiKey
       description: 'plugin::deamonChangeAutoMode – Change le mode de gestion du démon.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         plugin_id:
           type: integer
           description: 'ID du plugin'
@@ -667,8 +789,13 @@ components:
 
     UpdateDoUpdateParam:
       type: object
+      required:
+        - apiKey
       description: 'update::doUpdate – Met à jour un plugin spécifique.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         plugin_id:
           type: integer
           description: 'ID du plugin'
@@ -686,8 +813,12 @@ components:
       required:
         - type
         - message
+        - apiKey
       description: 'message::add – Ajoute un message dans le système de log.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         type:
           type: string
           description: 'Type de message (debug, info, warning, error)'
@@ -752,8 +883,13 @@ components:
 
     SummaryGlobalParam:
       type: object
+      required:
+        - apiKey
       description: 'summary::global – Retourne un résumé global ou filtré par clé.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         key:
           type: string
           description: 'Clé spécifique du résumé (facultatif)'
@@ -762,8 +898,12 @@ components:
       type: object
       required:
         - id
+        - apiKey
       description: 'summary::byId – Retourne un résumé pour un objet donné.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: 'ID de l’objet'
@@ -780,8 +920,12 @@ components:
       type: object
       required:
         - id
+        - apiKey
       description: 'eqLogic::fullById – Retourne un équipement et ses commandes (type info).'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: 'ID de l’équipement'
@@ -790,8 +934,12 @@ components:
       type: object
       required:
         - id
+        - apiKey
       description: 'eqLogic::byId – Retourne un équipement spécifique.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: 'ID de l’équipement'
@@ -800,8 +948,12 @@ components:
       type: object
       required:
         - type
+        - apiKey
       description: 'eqLogic::byType – Retourne les équipements d’un type donné.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         type:
           type: string
           description: 'Nom du plugin (type)'
@@ -810,16 +962,25 @@ components:
       type: object
       required:
         - object_id
+        - apiKey
       description: 'eqLogic::byObjectId – Retourne les équipements liés à un objet.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         object_id:
           type: integer
           description: 'ID de l’objet'
 
     EqLogicByTypeAndIdParam:
       type: object
+      required:
+        - apiKey
       description: 'eqLogic::byTypeAndId – Retourne les équipements filtrés par type et ID.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         eqType:
           type: array
           items:
@@ -839,8 +1000,12 @@ components:
         - type
         - subType
         - eqLogic_id
+        - apiKey
       description: 'eqLogic::save – Crée ou modifie un équipement.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: 'ID de l’équipement (vide si création)'
@@ -919,16 +1084,21 @@ components:
           description: 'Liste des équipements de l’objet. Non valorisé sauf pour Les méthodes "full"'
 
     JeeObjectFullParam:
-      type: object
+      type: array
+      items:
+        $ref: '#/components/schemas/JeeObjectByIdResponse'
       description: 'jeeObject::full – Retourne tous les objets avec équipements et commandes (type info).'
-      properties: {}
 
     JeeObjectByIdParam:
       type: object
       required:
         - id
+        - apiKey
       description: 'jeeObject::byId – Retourne un objet spécifique.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: 'ID de l’objet'
@@ -937,8 +1107,12 @@ components:
       type: object
       required:
         - id
+        - apiKey
       description: 'jeeObject::fullById – Retourne un objet complet avec ses équipements et commandes.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: 'ID de l’objet'
@@ -947,8 +1121,12 @@ components:
       type: object
       required:
         - name
+        - apiKey
       description: 'jeeObject::save – Crée ou met à jour un objet.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: 'ID de l’objet (vide si création)'
@@ -980,8 +1158,12 @@ components:
       type: object
       required:
         - id
+        - apiKey
       description: 'scenario::byId – Retourne un scénario spécifique.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: 'ID du scénario'
@@ -990,8 +1172,12 @@ components:
       type: object
       required:
         - id
+        - apiKey
       description: 'scenario::export – Exporte un scénario.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: 'ID du scénario'
@@ -1001,7 +1187,11 @@ components:
       description: 'scenario::import – Importe un scénario (ou le met à jour).'
       required:
         - import
+        - apiKey
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: 'ID du scénario cible (vide si création)'
@@ -1017,8 +1207,12 @@ components:
       required:
         - id
         - state
+        - apiKey
       description: 'scenario::changeState – Change l’état d’un scénario (run, stop, enable, disable).'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         id:
           type: integer
           description: 'ID du scénario'
@@ -1030,8 +1224,12 @@ components:
       type: object
       required:
         - key
+        - apiKey
       description: 'config::byKey – Retourne une valeur de configuration.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         key:
           type: string
           description: 'Clé de la valeur de configuration à retourner'
@@ -1047,8 +1245,12 @@ components:
       required:
         - key
         - value
+        - apiKey
       description: 'config::save – Enregistre une valeur de configuration.'
       properties:
+        apiKey:
+          type: string
+          description: 'Clé API autorisant l’accès'
         key:
           type: string
           description: 'Clé de la valeur à enregistrer'
